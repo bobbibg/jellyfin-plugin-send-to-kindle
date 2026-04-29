@@ -7,6 +7,15 @@
     "overview": "Adds a 'Send to Kindle' button to book detail pages. Each user sets their own @kindle.com address; admin configures SMTP (works with GMX, Gmail, any SMTP provider).",
     "owner": "bobbibg",
     "imageUrl": "",
-    "versions": []
+    "versions": [
+      {
+        "version": "1.0.0.0",
+        "changelog": "Release 1.0.0",
+        "targetAbi": "10.10.0.0",
+        "sourceUrl": "https://github.com/bobbibg/jellyfin-plugin-send-to-kindle/releases/download/v1.0.0/send-to-kindle_1.0.0.zip",
+        "checksum": "71bb1104afbe18296e8ccd932fdc8189",
+        "timestamp": "2026-04-29T14:50:21Z"
+      }
+    ]
   }
 ]
