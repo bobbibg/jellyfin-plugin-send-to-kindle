@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send to Kindle</title>
+</head>
+<body>
+<div id="SendToKindleUserConfigPage"
+     data-role="page"
+     class="page type-interior pluginConfigurationPage"
+     data-require="emby-input,emby-button">
+    <div data-role="content">
+        <div class="content-primary">
+            <h2>My Kindle</h2>
+            <p class="fieldDescription">
+                Set the email address Jellyfin should deliver books to. Find yours at
+                <a href="https://www.amazon.com/hz/mycd/myx#/home/settings/payment" target="_blank" rel="noopener">amazon.com &rarr; Manage Your Content and Devices &rarr; Preferences &rarr; Personal Document Settings</a>.
+                It'll look like <code>your-name_abc123@kindle.com</code>.
+            </p>
+            <p class="fieldDescription">
+                You also need to add the server's "From" address (set by your admin) to your
+                <strong>Approved Personal Document E-mail List</strong> on the same page,
+                otherwise Amazon will reject the books.
+            </p>
+
+            <form id="SendToKindleUserConfigForm">
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="KindleEmail">Your Kindle email</label>
+                    <input is="emby-input" type="email" id="KindleEmail" name="KindleEmail"
+                           pattern=".+@(kindle\.com|free\.kindle\.com)$" required />
+                    <div class="fieldDescription">
+                        Must end in <code>@kindle.com</code> or <code>@free.kindle.com</code>.
+                    </div>
+                </div>
+
+                <div>
+                    <button is="emby-button" type="submit" class="raised button-submit block">
+                        <span>Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            const page = document.querySelector('#SendToKindleUserConfigPage');
+
+            function loadCurrent() {
+                Dashboard.showLoadingMsg();
+                ApiClient.ajax({
+                    type: 'GET',
+                    url: ApiClient.getUrl('SendToKindle/UserConfig'),
+                    dataType: 'json'
+                }).then(function (data) {
+                    page.querySelector('#KindleEmail').value = (data && data.KindleEmail) || '';
+                    Dashboard.hideLoadingMsg();
+                }).catch(function () {
+                    Dashboard.hideLoadingMsg();
+                });
+            }
+
+            page.addEventListener('viewshow', loadCurrent);
+
+            page.querySelector('#SendToKindleUserConfigForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const email = page.querySelector('#KindleEmail').value.trim();
+                Dashboard.showLoadingMsg();
+                ApiClient.ajax({
+                    type: 'POST',
+                    url: ApiClient.getUrl('SendToKindle/UserConfig'),
+                    contentType: 'application/json',
+                    data: JSON.stringify({ KindleEmail: email })
+                }).then(function () {
+                    Dashboard.hideLoadingMsg();
+                    Dashboard.alert('Saved.');
+                }).catch(function (err) {
+                    Dashboard.hideLoadingMsg();
+                    Dashboard.alert('Failed to save: ' + (err && err.statusText ? err.statusText : 'unknown error'));
+                });
+                return false;
+            });
+        })();
+    </script>
+</div>
+</body>
+</html>

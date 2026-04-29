@@ -1,0 +1,12 @@
+[
+  {
+    "category": "General",
+    "guid": "b9a4d8c1-3f7e-4a2b-8c5d-1e6f9a0b2c3d",
+    "name": "Send to Kindle",
+    "description": "Send books from your Jellyfin library to your Kindle via email. Per-user Kindle addresses, admin-configured SMTP.",
+    "overview": "Adds a 'Send to Kindle' button to book detail pages. Each user sets their own @kindle.com address; admin configures SMTP (works with GMX, Gmail, any SMTP provider).",
+    "owner": "bobbibg",
+    "imageUrl": "",
+    "versions": []
+  }
+]
