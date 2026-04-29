@@ -1,8 +1,8 @@
 using System;
 using System.IO;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Jellyfin.Api.Helpers;
 using Jellyfin.Plugin.SendToKindle.Services;
 using MediaBrowser.Controller.Library;
 using Microsoft.AspNetCore.Authorization;
@@ -41,6 +41,18 @@ public class SendToKindleController : ControllerBase
     }
 
     /// <summary>
+    /// Resolves the calling user's Guid from Jellyfin's internal "Jellyfin-UserId" claim.
+    /// Mirrors what Jellyfin.Api.Helpers.ClaimHelpers does — re-implemented here so the
+    /// plugin doesn't have to reference the non-redistributable Jellyfin.Api assembly.
+    /// </summary>
+    private Guid GetCurrentUserId()
+    {
+        var value = User.FindFirst("Jellyfin-UserId")?.Value
+                    ?? User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return string.IsNullOrEmpty(value) ? Guid.Empty : Guid.Parse(value);
+    }
+
+    /// <summary>
     /// Send a book item to the calling user's configured Kindle address.
     /// </summary>
     [HttpPost("Send/{itemId}")]
@@ -49,7 +61,7 @@ public class SendToKindleController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> Send([FromRoute] Guid itemId, CancellationToken cancellationToken)
     {
-        var userId = User.GetUserId();
+        var userId = GetCurrentUserId();
         var kindleAddress = Plugin.Instance!.Configuration.GetKindleEmail(userId);
 
         if (string.IsNullOrWhiteSpace(kindleAddress))
@@ -92,7 +104,7 @@ public class SendToKindleController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<UserConfigDto> GetUserConfig()
     {
-        var userId = User.GetUserId();
+        var userId = GetCurrentUserId();
         var email = Plugin.Instance!.Configuration.GetKindleEmail(userId);
         return Ok(new UserConfigDto { KindleEmail = email ?? string.Empty });
     }
@@ -117,7 +129,7 @@ public class SendToKindleController : ControllerBase
             return BadRequest("Address must end in @kindle.com or @free.kindle.com.");
         }
 
-        var userId = User.GetUserId();
+        var userId = GetCurrentUserId();
         var plugin = Plugin.Instance!;
         plugin.Configuration.SetKindleEmail(userId, trimmed);
         plugin.SaveConfiguration();
@@ -133,7 +145,7 @@ public class SendToKindleController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> SendTest(CancellationToken cancellationToken)
     {
-        var userId = User.GetUserId();
+        var userId = GetCurrentUserId();
         var kindleAddress = Plugin.Instance!.Configuration.GetKindleEmail(userId);
 
         if (string.IsNullOrWhiteSpace(kindleAddress))
