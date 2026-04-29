@@ -14,11 +14,13 @@ namespace Jellyfin.Plugin.SendToKindle.Api;
 
 /// <summary>
 /// API endpoints for the Send to Kindle plugin.
-/// All endpoints require an authenticated Jellyfin user; the test endpoint additionally requires admin.
+/// Each action declares its own [Authorize] / [AllowAnonymous] explicitly. Earlier versions
+/// applied [Authorize(Policy = "DefaultAuthorization")] at the class level, but that policy
+/// name is not reliably registered for plugin controllers in Jellyfin 10.11+, causing every
+/// request to throw "AuthorizationPolicy named 'DefaultAuthorization' was not found".
 /// </summary>
 [ApiController]
 [Route("SendToKindle")]
-[Authorize(Policy = "DefaultAuthorization")]
 public class SendToKindleController : ControllerBase
 {
     private readonly EmailSender _emailSender;
@@ -56,6 +58,7 @@ public class SendToKindleController : ControllerBase
     /// Send a book item to the calling user's configured Kindle address.
     /// </summary>
     [HttpPost("Send/{itemId}")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -101,6 +104,7 @@ public class SendToKindleController : ControllerBase
     /// Get the calling user's Kindle email address.
     /// </summary>
     [HttpGet("UserConfig")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<UserConfigDto> GetUserConfig()
     {
@@ -113,6 +117,7 @@ public class SendToKindleController : ControllerBase
     /// Set the calling user's Kindle email address.
     /// </summary>
     [HttpPost("UserConfig")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public ActionResult SetUserConfig([FromBody] UserConfigDto dto)
@@ -140,11 +145,23 @@ public class SendToKindleController : ControllerBase
     /// Send a tiny test message to the calling admin's Kindle address. Admin-only.
     /// </summary>
     [HttpPost("Test")]
-    [Authorize(Policy = "RequiresElevation")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> SendTest(CancellationToken cancellationToken)
     {
+        // Admin-only: replaces the previous [Authorize(Policy = "RequiresElevation")]
+        // because that policy isn't reliably registered for plugins in JF 10.11+.
+        var isAdmin = string.Equals(
+            User.FindFirst("Jellyfin-IsAdministrator")?.Value,
+            "true",
+            StringComparison.OrdinalIgnoreCase);
+        if (!isAdmin)
+        {
+            return Forbid();
+        }
+
         var userId = GetCurrentUserId();
         var kindleAddress = Plugin.Instance!.Configuration.GetKindleEmail(userId);
 

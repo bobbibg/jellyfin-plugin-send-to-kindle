@@ -52,17 +52,37 @@ jobs:
 
       - name: Package plugin zip
         run: |
+          set -euo pipefail
           OUT=Jellyfin.Plugin.SendToKindle/bin/Release/net8.0
           mkdir -p dist
+
+          echo "===== Files in build output ====="
+          ls -la "$OUT"
+
+          # Required: plugin DLL + MailKit/MimeKit/BouncyCastle (Jellyfin host
+          # does NOT provide MailKit, despite shipping it elsewhere — plugins
+          # load in their own AssemblyLoadContext).
+          REQUIRED=(
+            "Jellyfin.Plugin.SendToKindle.dll"
+            "MailKit.dll"
+            "MimeKit.dll"
+            "BouncyCastle.Cryptography.dll"
+          )
+          for f in "${REQUIRED[@]}"; do
+            if [ ! -f "$OUT/$f" ]; then
+              echo "ERROR: Required file missing from build output: $f"
+              exit 1
+            fi
+          done
+
           cd "$OUT"
-          # Bundle the plugin .dll plus the dependencies the host doesn't already provide.
           zip -j "$GITHUB_WORKSPACE/dist/send-to-kindle_${{ steps.version.outputs.version }}.zip" \
-            Jellyfin.Plugin.SendToKindle.dll \
-            MailKit.dll \
-            MimeKit.dll \
-            BouncyCastle.Cryptography.dll
+            "${REQUIRED[@]}"
           cd "$GITHUB_WORKSPACE"
+
+          echo "===== Final zip ====="
           ls -la dist/
+          unzip -l "dist/send-to-kindle_${{ steps.version.outputs.version }}.zip"
 
       - name: Compute checksum
         id: checksum
