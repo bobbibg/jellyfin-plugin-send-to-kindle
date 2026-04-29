@@ -260,22 +260,23 @@
     }
 
     function buildBookButton(itemId) {
+        // Icon-only button matching Jellyfin's other paper-icon detail buttons
+        // (favorite, more-vert, etc.) so it sits flush next to them visually.
         const button = document.createElement('button');
         button.id = BOOK_BUTTON_ID;
         button.type = 'button';
-        button.className = 'button-flat detailButton emby-button';
+        button.setAttribute('is', 'paper-icon-button-light');
+        button.className = 'paper-icon-button-light';
         button.title = 'Send to Kindle';
-        button.innerHTML =
-            '<div class="detailButton-content">' +
-              '<span class="material-icons detailButton-icon" aria-hidden="true">tablet_android</span>' +
-              '<span class="detailButton-text">Send to Kindle</span>' +
-            '</div>';
+        button.setAttribute('aria-label', 'Send to Kindle');
+        button.innerHTML = '<span class="material-icons" aria-hidden="true">tablet_android</span>';
+
+        // Reset to icon after transient states.
+        const setIcon = (name) => {
+            button.querySelector('span.material-icons').textContent = name;
+        };
 
         button.addEventListener('click', async function () {
-            const textEl = button.querySelector('.detailButton-text');
-            const original = textEl.textContent;
-            const setText = (t) => { textEl.textContent = t; };
-
             // If the user has no Kindle address set, prompt before sending.
             try {
                 const cfg = await fetchUserConfig();
@@ -291,11 +292,11 @@
             }
 
             button.disabled = true;
-            setText('Sending...');
+            setIcon('hourglass_top');
             try {
                 await sendBook(itemId);
-                setText('Sent ✓');
-                window.setTimeout(() => { setText(original); button.disabled = false; }, 2500);
+                setIcon('check');
+                window.setTimeout(() => { setIcon('tablet_android'); button.disabled = false; }, 2500);
             } catch (err) {
                 let message = 'Send failed';
                 try {
@@ -303,11 +304,23 @@
                     else if (err && err.statusText) message = err.statusText;
                 } catch (e) { /* ignore */ }
                 window.alert('Send to Kindle: ' + message);
-                setText(original);
+                setIcon('tablet_android');
                 button.disabled = false;
             }
         });
         return button;
+    }
+
+    /**
+     * Find the "More" / 3-dot button so we can place ours immediately to its left.
+     * Jellyfin's selector for it has changed across versions, so we try several.
+     */
+    function findMoreButton(container) {
+        return container.querySelector('.btnMoreCommands')
+            || container.querySelector('button[is="paper-icon-button-light"][title="More"]')
+            || container.querySelector('button[title*="More"]')
+            || container.querySelector('.material-icons.more_vert')?.closest('button')
+            || null;
     }
 
     async function maybeInjectBookButton() {
@@ -325,7 +338,13 @@
         } catch (e) { return; }
         if (!item || item.Type !== 'Book') return;
 
-        container.appendChild(buildBookButton(item.Id));
+        const button = buildBookButton(item.Id);
+        const moreBtn = findMoreButton(container);
+        if (moreBtn) {
+            container.insertBefore(button, moreBtn);
+        } else {
+            container.appendChild(button);
+        }
     }
 
     // ----- Observer + bootstrap --------------------------------------------
