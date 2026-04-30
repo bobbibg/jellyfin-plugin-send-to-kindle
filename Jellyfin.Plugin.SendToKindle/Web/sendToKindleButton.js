@@ -68,6 +68,64 @@
         });
     }
 
+    // ----- Toast notifications --------------------------------------------
+
+    /**
+     * Show a Jellyfin-native toast notification. Tries require(['toast'], ...)
+     * first (which is how IntroSkipper and similar plugins do it), falls back
+     * to a self-rendered toast if the module loader isn't available.
+     */
+    function showToast(message) {
+        // Fast path: Jellyfin's RequireJS-bundled toast module
+        if (typeof window.require === 'function') {
+            try {
+                window.require(['toast'], function (toast) {
+                    if (typeof toast === 'function') {
+                        toast(message);
+                    } else if (toast && typeof toast.default === 'function') {
+                        toast.default(message);
+                    } else if (toast && typeof toast.show === 'function') {
+                        toast.show(message);
+                    } else {
+                        renderFallbackToast(message);
+                    }
+                }, function () { renderFallbackToast(message); });
+                return;
+            } catch (e) {
+                // fall through
+            }
+        }
+        renderFallbackToast(message);
+    }
+
+    function renderFallbackToast(message) {
+        // Match Jellyfin's snackbar visual: bottom-center, rounded, dark.
+        let host = document.getElementById('sendToKindleToastHost');
+        if (!host) {
+            host = document.createElement('div');
+            host.id = 'sendToKindleToastHost';
+            host.style.cssText =
+                'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);' +
+                'z-index:10000;display:flex;flex-direction:column;gap:8px;align-items:center;' +
+                'pointer-events:none;';
+            document.body.appendChild(host);
+        }
+        const toast = document.createElement('div');
+        toast.style.cssText =
+            'background:#323232;color:#fff;padding:0.85em 1.4em;border-radius:4px;' +
+            'box-shadow:0 3px 5px rgba(0,0,0,0.3);font-size:0.95em;' +
+            'opacity:0;transition:opacity 200ms ease-in;';
+        toast.textContent = message;
+        host.appendChild(toast);
+        // Fade in
+        window.requestAnimationFrame(() => { toast.style.opacity = '1'; });
+        // Auto-remove after 3.5s
+        window.setTimeout(() => {
+            toast.style.opacity = '0';
+            window.setTimeout(() => toast.remove(), 250);
+        }, 3500);
+    }
+
     // ----- Modal -----------------------------------------------------------
 
     function ensureModalStyles() {
@@ -177,6 +235,7 @@
                     await saveUserConfig(value);
                     status.className = 'stk-status ok';
                     status.textContent = 'Saved.';
+                    showToast('Kindle email saved.');
                     window.setTimeout(() => { close(); resolve(value); }, 600);
                 } catch (err) {
                     status.className = 'stk-status error';
@@ -295,15 +354,20 @@
             setIcon('hourglass_top');
             try {
                 await sendBook(itemId);
+                showToast('Sent to Kindle. Delivery takes 1–5 minutes.');
                 setIcon('check');
                 window.setTimeout(() => { setIcon('tablet_android'); button.disabled = false; }, 2500);
             } catch (err) {
-                let message = 'Send failed';
+                let message = 'Send to Kindle failed';
                 try {
-                    if (err && err.response) message = (await err.response.text()) || message;
-                    else if (err && err.statusText) message = err.statusText;
+                    if (err && err.response) {
+                        const body = (await err.response.text()).trim();
+                        if (body) message = 'Send to Kindle: ' + body;
+                    } else if (err && err.statusText) {
+                        message = 'Send to Kindle: ' + err.statusText;
+                    }
                 } catch (e) { /* ignore */ }
-                window.alert('Send to Kindle: ' + message);
+                showToast(message);
                 setIcon('tablet_android');
                 button.disabled = false;
             }
