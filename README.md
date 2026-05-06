@@ -1,5 +1,32 @@
 # Jellyfin Send to Kindle Plugin
 
+> ⚠️ **Hobby project — use at your own risk.**
+>
+> This is a personal hobby plugin. It works for me on my Jellyfin
+> install, but it's been heavily vibe-coded over many late nights and
+> isn't intended for public release. There is **no support, no
+> warranty, no commitment to fix issues** raised by anyone other than
+> me. If something breaks on your end you're on your own.
+>
+> **No guarantee this repo stays where it is.** This repo and the
+> manifest URL it serves may be made private, deleted, archived, or
+> moved to a different account / URL with no notice. If you want to
+> use this plugin or its code, **fork the repo now** so you have your
+> own copy and your own manifest URL you control.
+>
+> **If I ever decide to open-source either this or Cypherflix Hub,
+> I'll do that explicitly at a later time** — until then, assume
+> nothing about long-term availability.
+>
+> Unlike the [Cypherflix Hub](https://github.com/bobbibg/jellyfin-plugin-cypherflix-hub)
+> plugin, this one has no external service dependencies — it's just
+> SMTP + a button — so it's actually viable to run elsewhere if you
+> fork it. The recommended path is: fork, change the GitHub username
+> in `manifest.json`, build via the included GitHub Actions, point
+> your Jellyfin at your fork's manifest URL.
+
+---
+
 A Jellyfin plugin that adds a **Send to Kindle** button to book detail pages. Each
 user sets their own `@kindle.com` address; the admin configures one SMTP account
 (GMX, Gmail, anything) and the plugin handles per-user delivery.
