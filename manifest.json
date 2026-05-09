@@ -6,7 +6,7 @@
     "description": "Send books from your Jellyfin library to your Kindle via email. Per-user Kindle addresses, admin-configured SMTP.",
     "overview": "Adds a 'Send to Kindle' button to book detail pages. Each user sets their own @kindle.com address; admin configures SMTP (works with GMX, Gmail, any SMTP provider).",
     "owner": "bobbibg",
-    "imageUrl": "",
+    "imageUrl": "https://raw.githubusercontent.com/bobbibg/jellyfin-plugin-send-to-kindle/main/send-to-kindle.png",
     "versions": [
       {
         "version": "1.1.3.0",
