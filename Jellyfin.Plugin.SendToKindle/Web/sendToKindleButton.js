@@ -387,27 +387,53 @@
             || null;
     }
 
+    // Synchronous lock to prevent concurrent ticks racing through the async
+    // getItem() call and both appending a button. The pre-await check at the
+    // top is necessary but not sufficient — between the time we read "no
+    // button exists" and the time we appendChild after the await, another
+    // tick can do the same dance and we end up with duplicates.
+    let _injectingBookButton = false;
+
     async function maybeInjectBookButton() {
+        if (_injectingBookButton) return;
+        // First check: skip if a button is already in the live DOM.
         if (document.getElementById(BOOK_BUTTON_ID)) return;
         const itemId = getItemIdFromHash();
         if (!itemId) return;
         const api = getApiClient();
         if (!api) return;
-        const container = findActionsContainer();
-        if (!container) return;
+        // Don't hold a stale container reference across the await — Jellyfin
+        // may rebuild the actions row during navigation. We re-query after.
+        if (!findActionsContainer()) return;
 
-        let item;
+        _injectingBookButton = true;
         try {
-            item = await api.getItem(api.getCurrentUserId(), itemId);
-        } catch (e) { return; }
-        if (!item || item.Type !== 'Book') return;
+            let item;
+            try {
+                item = await api.getItem(api.getCurrentUserId(), itemId);
+            } catch (e) { return; }
+            if (!item || item.Type !== 'Book') return;
 
-        const button = buildBookButton(item.Id);
-        const moreBtn = findMoreButton(container);
-        if (moreBtn) {
-            container.insertBefore(button, moreBtn);
-        } else {
-            container.appendChild(button);
+            // Re-check post-await: another tick may have inserted the button
+            // while we were waiting on getItem, AND the container may have
+            // been replaced by Jellyfin's page rebuild during navigation.
+            if (document.getElementById(BOOK_BUTTON_ID)) return;
+            const container = findActionsContainer();
+            if (!container) return;
+            // Belt-and-braces: verify the freshly-fetched container doesn't
+            // already host a button (covers cases where the id was stripped
+            // by some other extension before the global getElementById ran).
+            if (container.querySelector('#' + BOOK_BUTTON_ID)) return;
+
+            const button = buildBookButton(item.Id);
+            const moreBtn = findMoreButton(container);
+            if (moreBtn) {
+                container.insertBefore(button, moreBtn);
+            } else {
+                container.appendChild(button);
+            }
+        } finally {
+            _injectingBookButton = false;
         }
     }
 

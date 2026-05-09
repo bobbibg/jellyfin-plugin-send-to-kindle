@@ -1,0 +1,212 @@
+Format: {Book Series}/{Book Title}{ (PartNumber)}{ [Book ISBN]}
+================================================================================
+Total renames: 84
+
+
+# Amal El-Mohtar
+  Amal El-Mohtar/The River Has Roots.epub
+  -> Amal El-Mohtar/Seasons of Glass and Iron.epub
+
+# Bob Mortimer
+  Bob Mortimer/The Hotel Avocado.epub
+  -> Bob Mortimer/Gary Thorn/The Hotel Avocado.epub
+  Bob Mortimer/The Satsuma Complex.epub
+  -> Bob Mortimer/Gary Thorn/The Satsuma Complex.epub
+
+# Brandon Sanderson
+  Brandon Sanderson/The Sunlit Man.epub
+  -> Brandon Sanderson/The Cosmere/The Sunlit Man.epub
+  Brandon Sanderson/Yumi and the Nightmare Painter.epub
+  -> Brandon Sanderson/Hoid's Travails/Yumi and the Nightmare Painter.epub
+  Brandon Sanderson/Dawnshard.epub
+  -> Brandon Sanderson/The Stormlight Archive/Dawnshard.epub
+  Brandon Sanderson/Cytonic.epub
+  -> Brandon Sanderson/Skyward/Cytonic.epub
+  Brandon Sanderson/Starsight.epub
+  -> Brandon Sanderson/Skyward/Starsight.epub
+  Brandon Sanderson/Skyward.epub
+  -> Brandon Sanderson/Skyward/Skyward.epub
+  Brandon Sanderson/Mistborn_ Secret History - Brandon Sanderson.epub
+  -> Brandon Sanderson/The Mistborn Saga/Secret History.epub
+  Brandon Sanderson/Arcanum Unbounded.epub
+  -> Brandon Sanderson/The Mistborn Saga/Arcanum Unbounded - The Cosmere Collection.epub
+  Brandon Sanderson/The Lost Metal.epub
+  -> Brandon Sanderson/Mistborn, Era 2 - Wax & Wayne/The Lost Metal.epub
+  Brandon Sanderson/Shadows for Silence in the Forests of Hell.epub
+  -> Brandon Sanderson/The Cosmere/Shadows for Silence in the Forests of Hell.epub
+  Brandon Sanderson/Mitosis.epub
+  -> Brandon Sanderson/The Reckoners/Mitosis.epub
+  Brandon Sanderson/The Dark Talent.epub
+  -> Brandon Sanderson/Alcatraz vs. the Evil Librarians/The Dark Talent.epub
+  Brandon Sanderson/Wind and Truth.epub
+  -> Brandon Sanderson/The Stormlight Archive/Wind and Truth.epub
+  Brandon Sanderson/Rhythm of War.epub
+  -> Brandon Sanderson/The Stormlight Archive/Rhythm of War.epub
+  Brandon Sanderson/Shadows of Self.epub
+  -> Brandon Sanderson/Mistborn, Era 2 - Wax & Wayne/Shadows of Self.epub
+  Brandon Sanderson/Defending Elysium.epub
+  -> Brandon Sanderson/Skyward/Defending Elysium.epub
+  Brandon Sanderson/The Rithmatist.epub
+  -> Brandon Sanderson/Rithmatist/The Rithmatist.epub
+  Brandon Sanderson/The Alloy of Law.epub
+  -> Brandon Sanderson/Mistborn, Era 2 - Wax & Wayne/The Alloy of Law.epub
+  Brandon Sanderson/The Shattered Lens.epub
+  -> Brandon Sanderson/Alcatraz vs. the Evil Librarians/The Shattered Lens - Alcatraz vs. the Evil Librarians.epub
+
+# Chuck Tingle
+  Chuck Tingle/Trans Wizard Harriet Porber And The Bad Boy Parasaurolophus.epub
+  -> Chuck Tingle/Trans Wizard Harriet Porber/Trans Wizard Harriet Porber and the Bad Boy Parasaurolophus.epub
+
+# Dan Roam
+  Dan Roam/Back of the Napkin (Expanded Editio.epub
+  -> Dan Roam/Narysuj swoje myśli. Jak skutecznie prezentować i sprzedawać pomysły na kartce papieru.epub
+  Dan Roam/Back of The Napkin.epub
+  -> Dan Roam/Back of The Napkin - Solving Problems and Selling Ideas with Pictures.epub
+
+# Evie Wright
+  Evie Wright/The Connection Between Childhood Tra.epub
+  -> Evie Wright/The Connection Between Childhood Trauma and Substance Abuse.epub
+
+# James S.A. Corey
+  James S. A. Corey/The Vital Abyss.epub
+  -> James S. A. Corey/The Expanse/The Vital Abyss.epub
+
+# Jamie Glowacki
+  Jamie Glowacki/Oh Crap! Potty Training.epub
+  -> Jamie Glowacki/Oh Crap!/Oh Crap! Potty Training - Everything Modern Parents Need to Know to Do It Once and Do It Right (Oh Crap Parenting Book 1).epub
+
+# Jim Butcher
+  Jim Butcher/Battle Ground.epub
+  -> Jim Butcher/The Dresden Files/Battle Ground.epub
+  Jim Butcher/Peace Talks.epub
+  -> Jim Butcher/The Dresden Files/Peace Talks.epub
+  Jim Butcher/Cold Days.epub
+  -> Jim Butcher/The Dresden Files/Cold Days.epub
+  Jim Butcher/Ghost Story.epub
+  -> Jim Butcher/The Dresden Files/Ghost Story.epub
+  Jim Butcher/Changes.epub
+  -> Jim Butcher/The Dresden Files/Changes.epub
+  Jim Butcher/Dead Beat.epub
+  -> Jim Butcher/The Dresden Files/Dead Beat.epub
+  Jim Butcher/Small Favour.epub
+  -> Jim Butcher/The Dresden Files/Small Favour.epub
+  Jim Butcher/Storm Front.epub
+  -> Jim Butcher/The Dresden Files/Storm Front.epub
+  Jim Butcher/Proven Guilty.epub
+  -> Jim Butcher/The Dresden Files/Proven Guilty.epub
+  Jim Butcher/Blood Rites.epub
+  -> Jim Butcher/The Dresden Files/Blood Rites.epub
+
+# Kevin Hearne
+  Kevin Hearne/Two Tales of the Iron Druid Chronicles.epub
+  -> Kevin Hearne/The Iron Druid Chronicles/Two Tales of the Iron Druid Chronicles.epub
+  Kevin Hearne/Three Slices.epub
+  -> Kevin Hearne/Miriam Black/Three Slices.epub
+  Kevin Hearne/Staked.epub
+  -> Kevin Hearne/The Iron Druid Chronicles/Staked.epub
+  Kevin Hearne/Shattered.epub
+  -> Kevin Hearne/The Iron Druid Chronicles/Shattered.epub
+  Kevin Hearne/Hunted.epub
+  -> Kevin Hearne/The Iron Druid Chronicles/Hunted.epub
+  Kevin Hearne/Tricked.epub
+  -> Kevin Hearne/The Iron Druid Chronicles/Tricked.epub
+
+# Leonardo da Vinci
+  Leonardo da Vinci/The Notebooks of Leonardo Da Vinci.epub
+  -> Leonardo da Vinci/Leonardo's Notebooks.epub
+
+# M.C. Beaton
+  M. C. Beaton/Agatha Raisin in Down the Hatch.epub
+  -> M. C. Beaton/Agatha Raisin/Down the Hatch.epub
+  M. C. Beaton/Agatha Raisin_ Dishing the Dirt - M.C. Beaton.epub
+  -> M. C. Beaton/Agatha Raisin/Dishing the Dirt.epub
+  M. C. Beaton/Agatha Raisin and the Blood of an Englishman.epub
+  -> M. C. Beaton/Agatha Raisin/Agatha Raisin and the Blood of an Englishman.epub
+  M. C. Beaton/Agatha Raisin and the Vicious Vet.epub
+  -> M. C. Beaton/Agatha Raisin/Agatha Raisin and the Vicious Vet.epub
+  M. C. Beaton/Agatha Raisin and the Curious Curate.epub
+  -> M. C. Beaton/Agatha Raisin/Agatha Raisin and the Curious Curate.epub
+  M. C. Beaton/Agatha Raisin and the Witch of Wyckhadden.epub
+  -> M. C. Beaton/Agatha Raisin/Agatha Raisin and the Witch of Wykhadden.epub
+
+# Martha Wells
+  Martha Wells/Compulsory.epub
+  -> Martha Wells/The Murderbot Diaries/Compulsory.epub
+  Martha Wells/Home.epub
+  -> Martha Wells/The Murderbot Diaries/Home - Habitat, Range, Niche, Territory.epub
+  Martha Wells/Exit Strategy.epub
+  -> Martha Wells/The Murderbot Diaries/Exit Strategy.epub
+  Martha Wells/Edge of Worlds.epub
+  -> Martha Wells/The Books of the Raksura/The Edge of Worlds.epub
+  Martha Wells/Stories of the Raksura.epub
+  -> Martha Wells/The Books of the Raksura/Stories of the Raksura - The Falling World.epub
+  Martha Wells/Stories of the Raksura_ The Dead City & Th - Martha Wells.epub
+  -> Martha Wells/Stories of the Raksura/Stories of the Raksura - The Dead City & The Dark Earth Below - Volume Two - The Dead City & The Dark Earth Below.epub
+  Martha Wells/The Serpent Sea.epub
+  -> Martha Wells/The Books of the Raksura/The Serpent Sea.epub
+  Martha Wells/The Cloud Roads.epub
+  -> Martha Wells/The Books of the Raksura/The Cloud Roads.epub
+
+# N.K. Jemisin
+  N. K. Jemisin/The Stone Sky.epub
+  -> N. K. Jemisin/The Broken Earth/The Stone Sky.epub
+  N. K. Jemisin/Shades in Shadow.epub
+  -> N. K. Jemisin/Inheritance Trilogy/Shades in Shadow.epub
+  N. K. Jemisin/The Shadowed Sun.epub
+  -> N. K. Jemisin/Dreamblood/The Shadowed Sun.epub
+
+# Pierce Brown
+  Pierce Brown/Morning Star.epub
+  -> Pierce Brown/Red Rising Saga/Morning Star.epub
+  Pierce Brown/Golden Son.epub
+  -> Pierce Brown/Red Rising Saga/Golden Son.epub
+  Pierce Brown/Red Rising.epub
+  -> Pierce Brown/Red Rising Saga/Red Rising.epub
+
+# Richard Osman
+  Richard Osman/The Bullet That Missed.epub
+  -> Richard Osman/Thursday Murder Club/The Bullet That Missed.epub
+  Richard Osman/The Last Devil To Die.epub
+  -> Richard Osman/Thursday Murder Club/The Last Devil to Die.epub
+  Richard Osman/The Man Who Died Twice.epub
+  -> Richard Osman/Thursday Murder Club/The Man Who Died Twice.epub
+
+# Robin Hobb
+  Robin Hobb/The Rain Wild Chronicles.epub
+  -> Robin Hobb/Rain Wild Chronicles/The Rain Wild Chronicles - The Complete 4-Book Collection.epub
+  Robin Hobb/The Wilful Princess and the Piebald Prince.epub
+  -> Robin Hobb/The Farseer Trilogy/The Wilful Princess and the Piebald Prince.epub
+  Robin Hobb/The Complete Tawny Man Trilogy.epub
+  -> Robin Hobb/The Tawny Man/The Complete Tawny Man Trilogy - Fool’s Errand, The Golden Fool, Fool’s Fate.epub
+  Robin Hobb/The Complete Soldier Son Trilogy.epub
+  -> Robin Hobb/Soldier Son/The Complete Soldier Son Trilogy - Shaman's Crossing, Forest Mage, Renegade's Magic.epub
+  Robin Hobb/The Complete Farseer Trilogy.epub
+  -> Robin Hobb/The Farseer Trilogy/The Complete Farseer Trilogy.epub
+  Robin Hobb/The Complete Liveship Traders Trilogy.epub
+  -> Robin Hobb/The Liveship Traders/The Complete Liveship Traders Trilogy - Ship of Magic, The Mad Ship, Ship of Destiny.epub
+  Robin Hobb/The Inheritance.epub
+  -> Robin Hobb/Rain Wild Chronicles/The Inheritance.epub
+
+# Samantha Shannon
+  Samantha Shannon/The Song Rising.epub
+  -> Samantha Shannon/The Bone Season/The Song Rising.epub
+  Samantha Shannon/The Mask Falling.epub
+  -> Samantha Shannon/The Bone Season/The Mask Falling.epub
+  Samantha Shannon/The Bone Season.epub
+  -> Samantha Shannon/The Bone Season/The Bone Season.epub
+  Samantha Shannon/The Priory of the Orange Tree.epub
+  -> Samantha Shannon/The Roots of Chaos/The Priory of the Orange Tree.epub
+
+# Seanan McGuire
+  Seanan McGuire/Come Tumbling Down.epub
+  -> Seanan McGuire/Wayward Children/Come Tumbling Down.epub
+  Seanan McGuire/In an Absent Dream.epub
+  -> Seanan McGuire/Wayward Children/In an Absent Dream.epub
+  Seanan McGuire/Beneath the Sugar Sky.epub
+  -> Seanan McGuire/Wayward Children/Beneath the Sugar Sky.epub
+  Seanan McGuire/Down Among the Sticks and Bones.epub
+  -> Seanan McGuire/Wayward Children/Down Among the Sticks and Bones.epub
+
+# Steve McHugh
+  Steve McHugh/Horsemen's War.epub
+  -> Steve McHugh/The Rebellion Chronicles/Horsemen's War.epub
